@@ -42,7 +42,7 @@
 
             <!-- 状态3：点击"否"后的拒绝提示 -->
             <div id="modalReject" class="hidden py-10">
-                <p class="text-2xl font-bold text-gray-700 mb-8 animate-pulse">好叭……那你不能進去哦 ×</p>
+                <p class="text-2xl font-bold text-gray-700 mb-8 animate-pulse">好叭……那你不能進去哦❌</p>
                 <button onclick="resetModal()" class="w-full bg-blue-500 text-white py-4 rounded-xl text-xl font-bold hover:bg-blue-600 transition shadow-md">
                     我再想想我的年齡
                 </button>
@@ -53,12 +53,21 @@
 
     <!-- 控制逻辑的 JavaScript -->
     <script>
+        // 页面加载时，检查本地是否已经有"已满18岁"的记录
+        if (localStorage.getItem('ageVerified') === 'true') {
+            // 如果有记录，直接隐藏弹窗
+            document.getElementById('ageModal').style.display = 'none';
+        }
+
         function handleAdult(isAdult) {
             // 隐藏第一步的按钮
             document.getElementById('modalStep1').classList.add('hidden');
             
             if (isAdult) {
-                // 点击"是"，显示加载提示
+                // 点击"是"，给浏览器打上标记，下次不再弹出
+                localStorage.setItem('ageVerified', 'true');
+                
+                // 显示加载提示
                 document.getElementById('modalLoading').classList.remove('hidden');
                 
                 // 延迟1.5秒后，隐藏整个遮罩层，露出主页
