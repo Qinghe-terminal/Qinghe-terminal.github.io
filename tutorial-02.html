@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02 普通压缩与解压 - 赛博扫盲</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: "SimSun", "宋体", "Songti SC", serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- 顶部导航栏 -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-3xl mx-auto px-4 h-16 flex items-center">
+            <a href="index.html" class="text-blue-600 font-semibold hover:underline">← 返回目录</a>
+            <span class="ml-4 text-gray-400">|</span>
+            <span class="ml-4 text-gray-600 font-medium">02 普通压缩与解压</span>
+        </div>
+    </nav>
+
+    <!-- 文章主体 -->
+    <main class="max-w-3xl mx-auto px-4 py-10 bg-white shadow-sm mt-6 mb-10 rounded-xl">
+        
+        <h1 class="text-3xl font-bold mb-6 border-b pb-4">02 普通压缩与解压</h1>
+        
+        <!-- 本章定位提示框 -->
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-5 mb-8 rounded-r-lg shadow-sm">
+            <p class="text-blue-800 font-semibold mb-2">本章定位</p>
+            <p class="text-blue-900 leading-relaxed">本章只解决普通压缩包的使用问题：识别 ZIP、7Z、RAR，知道什么时候直接解压，Windows 端用 7-Zip，安卓端用 MT 管理器，处理带密码压缩包，以及看懂常见解压错误。分卷压缩与分卷解压放到下一章，本章不展开。</p>
+            <p class="text-blue-900 mt-2 font-bold">核心原则：能直接解压就不要先改后缀，能用成熟工具就不要在线解压，能保留原始压缩包就不要解压后立刻删除。</p>
+        </div>
+
+        <!-- 正文内容 -->
+        <div class="space-y-8 text-lg leading-relaxed text-gray-700">
+            
+            <!-- 一 -->
+            <section>
+                <h2 class="text-2xl font-bold text-gray-800 mt-8 mb-4 border-l-4 border-blue-500 pl-3">一、ZIP、7Z、RAR 的用途与最少必要区别</h2>
+                
+                <p>压缩包的作用主要有四个：把很多文件打成一个包，方便传输和保存；减小体积，节省下载时间和存储空间；给文件加密码，限制访问；作为分卷压缩的基础，把大文件切成多个小文件。资源群里常见的压缩包后缀主要是 ZIP、7Z、RAR，偶尔还会遇到 TAR、GZ、TGZ、ISO 等，但普通资源使用场景先掌握前三种即可。</p>
+                
+                <p class="mt-4"><strong>ZIP</strong> 是最通用的格式。Windows 系统原生支持，安卓、iOS、macOS 和大多数压缩工具都能打开。它的优点是兼容性最好，几乎不会出现“别人打不开”的问题。缺点是压缩率一般，传统 ZIP 加密强度较弱，而且很多 ZIP 加密只保护文件内容，不保护文件名。</p>
+                <p class="mt-4"><strong>7Z</strong> 是 7-Zip 的原生格式。它的优点是压缩率通常比 ZIP 高，支持 AES-256 加密，支持加密文件名，支持固实压缩，也方便做分卷。缺点是兼容性不如 ZIP，Windows 需要安装 7-Zip 或兼容工具，部分手机文件管理器不能直接打开。安卓端使用 MT 管理器可以正常创建和解压 7Z。</p>
+                <p class="mt-4"><strong>RAR</strong> 是 WinRAR 的常见格式。它的优点是压缩率高，支持恢复记录、分卷和加密，在资源分享中非常常见。缺点是创建 RAR 压缩包通常需要 WinRAR，7-Zip 一般只能解压 RAR，不能创建 RAR。MT 管理器可以解压 RAR，但创建时通常建议选择 ZIP 或 7Z。</p>
+                
+                <p class="mt-4 bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg text-blue-800 shadow-sm">
+                    <strong>最少必要区别记忆口诀：</strong>ZIP 最通用，7Z 压缩好且加密强，RAR 很常见但创建受限。遇到资源时先看后缀，不要凭图标判断。只要工具支持，直接解压即可。
+                </p>
+
+                <h3 class="text-xl font-semibold mt-6 mb-2 text-blue-700">什么时候只需要解压</h3>
+                <p>如果你的目标只是拿到压缩包里面的文件，用于安装、查看、播放、转发或继续处理，那么你只需要解压，不需要重新压缩，不需要改格式，也不需要研究压缩算法。</p>
+                <p class="mt-2">判断标准：你不需要把文件重新打包发给别人，不需要把 ZIP 改成 7Z，不需要把 RAR 改成 ZIP，不需要制作分卷，那么直接解压就是正确操作。</p>
+                
+                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 my-4 rounded-r-lg shadow-sm text-yellow-800">
+                    <strong>不要做以下事情：</strong>不要因为文件打不开就把 .7z 改成 .zip，不要因为手机自带文件管理器不支持就认为文件坏了，不要用在线解压网站处理隐私文件、大文件或加密文件，不要把压缩包里的文件一个一个拖出来代替正规解压。在线解压通常有大小限制、速度限制、隐私风险和文件被平台删除的风险，只适合临时查看不重要的公开小文件。
+                </div>
+            </section>
+
+            <!-- 二 -->
+            <section>
+                <h2 class="text-2xl font-bold text-gray-800 mt-8 mb-4 border-l-4 border-blue-500 pl-3">二、Windows 使用 7-Zip 创建压缩包</h2>
+                
+                <p>首先安装 7-Zip。建议从官网下载，安装时保持默认选项即可。安装完成后，在文件或文件夹上点击右键，菜单里会出现“7-Zip”相关选项。如果右键没有，说明没有安装成功，或者安装的是便携版但没有注册右键菜单。</p>
+                
+                <h3 class="text-xl font-semibold mt-6 mb-3 text-blue-700">创建普通压缩包的步骤</h3>
+                <ol class="list-decimal pl-6 space-y-3 mt-2">
+                    <li>选中一个或多个文件、文件夹。可以按住 Ctrl 多选，也可以直接选中一个文件夹。</li>
+                    <li>在选中的内容上点击右键，选择“7-Zip”，再选择“添加到压缩包”。</li>
+                    <li>在弹出的窗口中设置压缩包名称。建议使用清晰名称，例如：<br>
+                        <code class="bg-blue-50 text-blue-800 px-2 py-1 rounded shadow-sm border border-blue-100 inline-block mt-1">软件名_版本_平台_架构</code>
+                        <code class="bg-blue-50 text-blue-800 px-2 py-1 rounded shadow-sm border border-blue-100 inline-block mt-1">教程名_版本_更新时间</code>
+                        <br>不要使用“新建压缩包”“111”“aaa”这类无法辨认的名称。</li>
+                    <li>选择压缩格式。给别人分享、追求兼容性时选 ZIP。自己保存、追求压缩率和加密强度时选 7Z。不要随意选 RAR，因为 7-Zip 通常不能创建 RAR。</li>
+                    <li>设置压缩等级。仅存储表示不压缩，只打包，速度最快。最快和快速适合大量小文件或对时间敏感的场景。标准和最大适合大多数资源。极限压缩耗时更长，但体积可能只比最大小一点。普通使用选标准或最大即可。</li>
+                    <li>如果需要密码，在密码栏输入密码，并在确认栏再输入一次。使用 7Z 时，可以勾选“加密文件名”。勾选后，没有密码的人连压缩包里面有哪些文件都看不到。使用 ZIP 时，即使设置了密码，文件名通常仍然可见，而且传统 ZIP 加密安全性较弱。重要隐私文件建议用 7Z 并勾选加密文件名。</li>
+                    <li>点击确定，等待完成。完成后检查压缩包大小、后缀和所在位置。如果原文件很重要，压缩完成后不要立刻删除原文件，先测试压缩包能否正常打开和解压。</li>
+                </ol>
+            </section>
+
+            <!-- 三 -->
+            <section>
+                <h2 class="text-2xl font-bold text-gray-800 mt-8 mb-4 border-l-4 border-blue-500 pl-3">三、Windows 使用 7-Zip 解压到指定位置</h2>
+                
+                <h3 class="text-xl font-semibold mt-6 mb-3 text-blue-700">最简单的方法</h3>
+                <ol class="list-decimal pl-6 space-y-3 mt-2">
+                    <li>找到压缩包文件。确认后缀是 .zip、.7z 或 .rar。</li>
+                    <li>在压缩包上点击右键，选择“7-Zip”。</li>
+                    <li>如果选择“提取到当前位置”，文件会直接散落在当前目录，容易和别的文件混在一起，不推荐。推荐选择“提取到 文件夹名\”，7-Zip 会自动创建一个与压缩包同名的文件夹，把内容解压进去。</li>
+                    <li>如果需要指定路径，选择“提取到...”。在弹出的窗口中选择目标文件夹，例如：
+                        <code class="block bg-blue-50 text-blue-800 p-4 rounded-lg my-2 text-sm overflow-x-auto shadow-sm border border-blue-100">D:\Downloads\解压\资源名</code>
+                    然后点击确定。</li>
+                    <li>等待解压完成。解压过程中不要关闭窗口，不要拔出移动硬盘，不要强制关机。如果压缩包很大，解压时间会比较长。</li>
+                </ol>
+
+                <h3 class="text-xl font-semibold mt-6 mb-2 text-blue-700">另一种方法</h3>
+                <p>双击压缩包，用 7-Zip 打开。进入后可以像文件夹一样查看内容。选中需要的文件或文件夹，点击上方“提取”按钮，再选择目标路径。也可以只解压部分文件，不必全部解压。</p>
+
+                <h3 class="text-xl font-semibold mt-6 mb-3 text-blue-700">解压前检查</h3>
+                <ol class="list-decimal pl-6 space-y-3 mt-2">
+                    <li>确认压缩包大小正常。如果只有几 KB，很可能不是真正的资源。</li>
+                    <li>确认磁盘剩余空间足够。解压需要额外空间，建议预留压缩包大小的 1.5 到 2 倍。比如压缩包 10GB，最好有 20GB 以上剩余空间。</li>
+                    <li>确认压缩包没有加密，或者自己知道密码。</li>
+                    <li>如果是分卷压缩包，必须把所有分卷放在同一个目录，并从第一卷开始解压。这一点下一章会详细说明。</li>
+                    <li>解压路径尽量不要放在系统盘根目录、桌面或下载目录深处。建议建立专门的解压目录，例如：<code class="block bg-blue-50 text-blue-800 p-4 rounded-lg my-2 text-sm overflow-x-auto shadow-sm border border-blue-100">D:\Downloads\解压</code>这样便于查找、清理和排错。</li>
+                </ol>
+            </section>
+
+            <!-- 四 -->
+            <section>
+                <h2 class="text-2xl font-bold text-gray-800 mt-8 mb-4 border-l-4 border-blue-500 pl-3">四、Android 使用 MT 管理器创建压缩包</h2>
+                
+                <p>安卓端推荐使用 MT 管理器。它比很多系统自带文件管理器更适合处理资源群文件，支持查看完整路径、复制、移动、重命名、压缩、解压、查看属性、搜索文件。首次使用时，按提示授予存储权限。如果需要访问 Android/data 目录，还要按系统提示额外授权。</p>
+                
+                <h3 class="text-xl font-semibold mt-6 mb-3 text-blue-700">创建压缩包的步骤</h3>
+                <ol class="list-decimal pl-6 space-y-3 mt-2">
+                    <li>打开 MT 管理器，进入要压缩的文件或文件夹所在目录。例如：<code class="block bg-blue-50 text-blue-800 p-4 rounded-lg my-2 text-sm overflow-x-auto shadow-sm border border-blue-100">/storage/emulated/0/Download/资源群/软件</code></li>
+                    <li>长按一个文件或文件夹。如果需要多选，可以继续点击其他文件或文件夹。</li>
+                    <li>点击下方或菜单中的“压缩”选项。</li>
+                    <li>选择压缩格式。普通分享建议 ZIP，自己保存或需要加密文件名建议 7Z。MT 管理器通常支持创建 ZIP、7Z 等格式。</li>
+                    <li>设置压缩等级。普通使用选标准即可。文件已经很小、只想打包时选仅存储。追求体积更小时选较高等级。</li>
+                    <li>如果需要密码，在密码栏输入密码。使用 7Z 时，可以勾选加密文件名。使用 ZIP 时，文件名通常不会被加密。</li>
+                    <li>选择保存位置。建议保存到公共 Download 目录下的自建文件夹，例如：<code class="block bg-blue-50 text-blue-800 p-4 rounded-lg my-2 text-sm overflow-x-auto shadow-sm border border-blue-100">/storage/emulated/0/Download/资源群/压缩包</code>不要保存到系统目录，不要保存到 Android/data 的陌生应用目录。保存位置要自己记得住。</li>
+                    <li>确认压缩包名称，点击确定。等待完成后，用 MT 管理器查看文件属性，确认大小和后缀正常。</li>
+                </ol>
+            </section>
+
+            <!-- 五 -->
+            <section>
+                <h2 class="text-2xl font-bold text-gray-800 mt-8 mb-4 border-l-4 border-blue-500 pl-3">五、Android 使用 MT 管理器解压</h2>
+                
+                <h3 class="text-xl font-semibold mt-6 mb-3 text-blue-700">基本步骤</h3>
+                <ol class="list-decimal pl-6 space-y-3 mt-2">
+                    <li>打开 MT 管理器，找到压缩包。可以在 Download 目录、QQ 保存目录或微信保存目录中查找。找不到时，用 MT 管理器搜索文件名关键词，范围选择内部存储。</li>
+                    <li>点击压缩包。MT 管理器会进入压缩包预览界面，可以查看里面的文件列表。如果是加密压缩包，会提示输入密码。如果是加密文件名的 7Z，没有密码时可能看不到文件列表。</li>
+                    <li>点击“解压”或长按压缩包选择“解压”。不要直接点击里面的文件就以为已经解压。点击预览只是查看，不等于把文件释放到本地。</li>
+                    <li>选择解压目标位置。推荐选择“解压到当前目录”并新建一个与压缩包同名的文件夹，或者选择自定义路径，例如：<code class="block bg-blue-50 text-blue-800 p-4 rounded-lg my-2 text-sm overflow-x-auto shadow-sm border border-blue-100">/storage/emulated/0/Download/解压/资源名</code>不要解压到系统根目录，不要解压到 Android/data 中权限复杂的目录，不要解压到空间不足的分区。</li>
+                    <li>如果压缩包有密码，输入密码。注意大小写、空格、特殊字符。输入完成后点击确定，等待解压完成。</li>
+                    <li>解压完成后，进入目标文件夹检查文件是否齐全。可以对比压缩包预览界面里的文件列表。如果文件缺失、大小为 0、后缀异常，按后面的常见错误处理。</li>
+                </ol>
+
+                <h3 class="text-xl font-semibold mt-6 mb-2 text-blue-700">MT 管理器的实用操作</h3>
+                <p>如果只想解压压缩包里的某一个文件，可以进入压缩包预览，长按目标文件，选择“解压”，再选择目标目录。这样不必解压整个大包。</p>
+                <p class="mt-2">如果压缩包内文件名乱码，先不要急着改名。可以尝试用 7-Zip 或 MT 管理器重新打开，确认是编码问题还是文件本身如此。部分中文压缩包在 Windows 和安卓之间会出现编码差异，但内容通常仍然可用。</p>
+                <p class="mt-2">如果压缩包很大，解压时间会较长。解压过程中保持屏幕亮起或让 MT 管理器在后台运行，不要清理后台，不要断开存储。安卓系统可能会限制后台应用，导致解压中断。</p>
+            </section>
+
+            <!-- 六 -->
+            <section>
+                <h2 class="text-2xl font-bold text-gray-800 mt-8 mb-4 border-l-4 border-blue-500 pl-3">六、带密码压缩包</h2>
+                
+                <h3 class="text-xl font-semibold mt-6 mb-2 text-blue-700">创建密码压缩包</h3>
+                <p>Windows 端使用 7-Zip 时，选中文件，右键，7-Zip，添加到压缩包。格式选 7Z，输入密码并确认。需要隐藏文件名时勾选“加密文件名”。如果格式选 ZIP，也可以设置密码，但兼容性和安全性较弱，且文件名通常可见。</p>
+                <p class="mt-2">安卓端使用 MT 管理器时，长按文件，选择压缩，格式选 7Z，输入密码。需要隐藏文件名时勾选加密文件名。保存位置选择自己容易找到的公共目录。创建完成后，建议自己先尝试解压一次，确认密码正确、文件完整。</p>
+
+                <h3 class="text-xl font-semibold mt-6 mb-2 text-blue-700">解压密码压缩包</h3>
+                <p>Windows 端右键压缩包，选择 7-Zip，提取到指定位置。弹出密码窗口后输入密码。密码正确才会开始解压。如果密码错误，7-Zip 可能提示“数据错误”“CRC 失败”或“密码错误”。不要看到 CRC 就立刻认为文件损坏，先确认密码。</p>
+                <p class="mt-2">安卓端用 MT 管理器点击压缩包，输入密码后解压。如果密码包含大小写字母、数字、符号，建议先显示密码再核对。复制密码时注意不要多复制空格、换行或隐藏字符。中文输入法可能自动把半角符号变成全角符号，例如把英文引号变成中文引号，导致密码错误。</p>
+
+                <h3 class="text-xl font-semibold mt-6 mb-2 text-blue-700">密码大小写与空格</h3>
+                <p>密码区分大小写。Abc123 和 abc123 不是同一个密码。Caps Lock 是否开启要确认。密码中的空格也是密码的一部分。开头空格、结尾空格、中间多个空格都会影响结果。从网页或聊天记录复制密码时，很容易带上首尾空格。建议粘贴后手动检查一遍，或者使用支持显示密码的输入框查看。</p>
+                <p class="mt-2">如果密码是中文，注意输入法编码和复制来源。部分压缩工具对中文密码支持不一致，可能导致在 Windows 上能解压，在安卓上提示错误，或者反过来。遇到这种情况，优先回到创建压缩包的原始环境尝试，或者请分享者提供纯英文数字密码版本。</p>
+
+                <h3 class="text-xl font-semibold mt-6 mb-2 text-blue-700">文件名加密</h3>
+                <p>文件名加密是 7Z 和 RAR 常见功能，ZIP 传统加密通常不支持。开启文件名加密后，没有密码的人打开压缩包只能看到加密后的乱码或无法查看列表。优点是隐私性更好，缺点是兼容性略差，部分老工具可能无法正常提示输入密码。普通资源分享如果不涉及隐私，可以不勾选文件名加密，以提高兼容性。</p>
+
+                <h3 class="text-xl font-semibold mt-6 mb-2 text-blue-700">忘记密码怎么办</h3>
+                <p>如果密码完全忘记，普通用户基本无法恢复。不要相信所谓在线秒破，很多是骗局、广告或隐私陷阱。弱密码可以尝试回忆常用密码、大小写变体、是否多空格、是否用了中文符号。强密码忘记后，最现实的做法是重新获取资源或联系分享者。重要文件不要只依赖一个压缩包保存，应保留原始文件和密码记录。</p>
+            </section>
+
+            <!-- 七 -->
+            <section>
+                <h2 class="text-2xl font-bold text-gray-800 mt-8 mb-4 border-l-4 border-blue-500 pl-3">七、常见错误与处理</h2>
+                
+                <h3 class="text-xl font-semibold mt-6 mb-2 text-red-700">CRC 错误</h3>
+                <p>CRC 是循环冗余校验。解压时提示 CRC 错误，说明解压出来的数据与压缩包记录不一致。常见原因包括：下载不完整，传输过程中损坏，存储卡或硬盘有问题，密码输入错误，压缩包本身损坏，分卷缺少某一卷。处理顺序是：先确认密码是否正确，再确认文件大小是否与来源一致，再确认分卷是否齐全，然后重新下载。如果压缩包来自群文件或网盘，删除旧文件，完整重新下载一次。必要时用 7-Zip 的“测试压缩包”功能检查完整性。</p>
+
+                <h3 class="text-xl font-semibold mt-6 mb-2 text-red-700">数据错误</h3>
+                <p>数据错误是一个比较笼统的提示。它可能是密码错误，也可能是文件损坏、格式不识别、后缀被改错、下载不完整、分卷缺失。处理时不要只盯着“数据错误”四个字。先确认后缀是不是原始后缀，再确认密码，再确认文件大小，再用 7-Zip 或 MT 管理器重新打开。如果多个工具都报同样错误，通常是文件本身不完整或损坏，应重新下载。</p>
+
+                <h3 class="text-xl font-semibold mt-6 mb-2 text-red-700">意外文件结尾</h3>
+                <p>意外文件结尾通常表示压缩包没有完整结束，文件被截断了。最常见原因是下载中断、只下载了一部分、网盘客户端没有完整同步、分卷缺少后续卷、复制文件时中断。处理方法是：对比文件大小，重新下载完整文件；如果是分卷，确认 .001、.002、.003 等所有分卷都在同一目录；不要只下载第一卷就开始解压。如果重新下载后仍然报错，换下载方式或换来源。</p>
+
+                <h3 class="text-xl font-semibold mt-6 mb-2 text-red-700">磁盘空间不足</h3>
+                <p>解压需要额外空间。压缩包本身占一份空间，解压出来的文件还要再占一份，部分格式在解压过程中还需要临时空间。建议预留压缩包大小的 1.5 到 2 倍。例如压缩包 8GB，最好有 16GB 以上剩余空间。Windows 可以清理下载目录、临时文件、回收站，或者解压到空间更大的磁盘。安卓可以清理缓存、删除无用视频和重复文件，或者把压缩包转移到电脑上解压。不要解压到系统盘和存储空间紧张的目录。</p>
+
+                <h3 class="text-xl font-semibold mt-6 mb-3 text-red-700">解压后文件缺失</h3>
+                <p>解压后觉得文件缺失，先不要急着重下。按以下顺序检查。</p>
+                <ol class="list-decimal pl-6 space-y-3 mt-2">
+                    <li>打开压缩包预览，查看里面实际有哪些文件。有些资源本身就不包含你预期的文件。</li>
+                    <li>检查是否解压到了其他目录。Windows 可能默认解压到当前目录或同名文件夹，安卓 MT 管理器可能默认解压到当前目录。用搜索功能搜索文件名。</li>
+                    <li>检查文件名乱码。乱码可能让你误以为文件缺失，其实文件就在目录中。可以按修改时间排序，查看刚解压出来的文件。</li>
+                    <li>检查杀毒软件。Windows Defender 或其他杀毒软件可能把某些工具、补丁、注册机误报并隔离。查看隔离区，确认来源可信后再决定是否恢复。不要随意关闭杀毒软件，除非你完全清楚风险。</li>
+                    <li>检查分卷。分卷压缩包只解压第一卷时，如果缺少后续卷，可能只解出部分文件。必须所有分卷齐全后重新解压。</li>
+                    <li>检查是否只解压了单个文件。MT 管理器和 7-Zip 都支持只解压选中文件。如果你只选中了一个文件，其他文件不会自动出现。</li>
+                </ol>
+
+                <h3 class="text-xl font-semibold mt-6 mb-2 text-red-700">其他常见问题</h3>
+                <p><strong>无法打开压缩包：</strong>可能是后缀不对、文件损坏、格式不支持、压缩包加密、下载到的是网页而不是文件。先看文件大小和后缀，再用 7-Zip 测试。</p>
+                <p class="mt-2"><strong>中文文件名乱码：</strong>常见于 ZIP 编码差异。Windows 端 7-Zip 可以在设置中调整代码页，安卓端 MT 管理器通常能较好识别。若不影响内容使用，不建议批量改名，以免破坏关联文件。</p>
+                <p class="mt-2"><strong>权限不足：</strong>Windows 可能是目标目录没有写入权限，换到 D 盘或用户目录。安卓可能是目标目录受系统限制，换到 Download 或自建公共目录。</p>
+                <p class="mt-2"><strong>解压速度很慢：</strong>大文件、固实压缩、高压缩等级、机械硬盘、手机存储慢都会导致解压慢。不要频繁暂停，不要同时解压多个大包，耐心等待。</p>
+            </section>
+
+            <!-- 八 -->
+            <section>
+                <h2 class="text-2xl font-bold text-gray-800 mt-8 mb-4 border-l-4 border-blue-500 pl-3">八、推荐操作习惯</h2>
+                
+                <p>Windows 端建议建立固定目录，例如：</p>
+                <code class="block bg-blue-50 text-blue-800 p-4 rounded-lg my-4 text-sm overflow-x-auto shadow-sm border border-blue-100">D:\Downloads\压缩包</code>
+                <code class="block bg-blue-50 text-blue-800 p-4 rounded-lg my-4 text-sm overflow-x-auto shadow-sm border border-blue-100">D:\Downloads\解压</code>
+                <p>下载的原始压缩包放在“压缩包”，解压结果放在“解压”。解压完成后先检查文件，再决定是否删除原始压缩包。重要资源建议保留原始压缩包，直到确认新文件可用。</p>
+
+                <p class="mt-4">安卓端建议使用 MT 管理器，把公共 Download 目录作为中转站。从 QQ、微信、网盘保存文件后，统一复制到：</p>
+                <code class="block bg-blue-50 text-blue-800 p-4 rounded-lg my-4 text-sm overflow-x-auto shadow-sm border border-blue-100">/storage/emulated/0/Download/资源群/压缩包</code>
+                <code class="block bg-blue-50 text-blue-800 p-4 rounded-lg my-4 text-sm overflow-x-auto shadow-sm border border-blue-100">/storage/emulated/0/Download/资源群/解压</code>
+                <p>压缩包命名要清晰，不要随意改名，尤其是分卷压缩包。带密码的压缩包要把密码单独记录，不要只写在聊天记录里。解压前确认空间，解压后确认文件列表。遇到报错时，保留原始压缩包，不要反复解压同一个损坏文件。</p>
+            </section>
+
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mt-10 rounded-r-lg text-center shadow-sm">
+                <p class="text-blue-900 font-bold text-xl">本章的核心目标：</p>
+                <p class="text-blue-800 mt-2">认识 ZIP、7Z、RAR，知道什么时候只需要解压，掌握 Windows 7-Zip 和安卓 MT 管理器创建、解压、加密、指定位置的基本操作，并能根据 CRC、数据错误、意外文件结尾、磁盘空间不足、解压后文件缺失等提示做出正确处理。只要原始压缩包完整、密码正确、空间足够、工具合适，普通压缩与解压本身并不复杂。</p>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- 底部署名 -->
+    <footer class="text-center text-gray-400 text-sm mt-16 mb-8">
+        © 2026 STELLA_磬壑. 保留所有权利。
+    </footer>
+
+</body>
+</html>
