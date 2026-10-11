@@ -4,13 +4,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>赛博扫盲教程</title>
-    <!-- 引入 Tailwind CSS 库 -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 text-gray-800 font-sans">
-    <div class="max-w-3xl mx-auto mt-20 bg-white p-10 rounded-xl shadow-lg text-center">
-        <h1 class="text-4xl font-bold text-blue-600 mb-4">欢迎查看教程</h1>
-        <p class="text-lg">面向少数拥有设备或操作经验但缺少系统性知识的用户</p>
-    </div>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+    <!-- 顶部导航栏 -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+            <h1 class="text-xl font-bold text-blue-600">赛博扫盲</h1>
+            <div class="space-x-4">
+                <a href="#" class="text-gray-600 hover:text-blue-600">主页</a>
+                <a href="#" class="text-gray-600 hover:text-blue-600">关于</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主体内容 -->
+    <main class="max-w-5xl mx-auto px-4 py-10">
+        
+        <!-- 欢迎语 -->
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold mb-4">欢迎查看教程</h2>
+            <p class="text-gray-600 text-lg">面向有基本设备操作经验，但缺少系统性知识的用户</p>
+        </div>
+
+        <!-- 教程卡片网格 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- 卡片 01 -->
+            <a href="#" class="block p-6 bg-white rounded-xl shadow hover:shadow-lg transition duration-300 border border-gray-100">
+                <h3 class="text-xl font-semibold text-blue-600 mb-2">01 下载、群文件与网盘</h3>
+                <p class="text-gray-600 text-sm">浏览器下载记录、群文件查找、分享链接与提取码、保存到网盘与下载的区别。</p>
+            </a>
+
+            <!-- 卡片 02 -->
+            <a href="#" class="block p-6 bg-white rounded-xl shadow hover:shadow-lg transition duration-300 border border-gray-100">
+                <h3 class="text-xl font-semibold text-blue-600 mb-2">02 普通压缩与解压</h3>
+                <p class="text-gray-600 text-sm">ZIP/7Z/RAR区别、7-Zip与MT管理器操作、密码包、CRC报错与空间不足。</p>
+            </a>
+
+            <!-- 卡片 03 -->
+            <a href="#" class="block p-6 bg-white rounded-xl shadow hover:shadow-lg transition duration-300 border border-gray-100">
+                <h3 class="text-xl font-semibold text-blue-600 mb-2">03 分卷压缩与分卷解压</h3>
+                <p class="text-gray-600 text-sm">.001/.002文件合并、打开哪个分卷、缺失卷处理、7-Zip与Android分卷操作。</p>
+            </a>
+
+            <!-- 卡片 04 -->
+            <a href="#" class="block p-6 bg-white rounded-xl shadow hover:shadow-lg transition duration-300 border border-gray-100">
+                <h3 class="text-xl font-semibold text-blue-600 mb-2">04 文件后缀与格式转换</h3>
+                <p class="text-gray-600 text-sm">显示后缀、正确改名、改后缀不等于格式转换、格式转换工具推荐。</p>
+            </a>
+
+            <!-- 卡片 05 -->
+            <a href="#" class="block p-6 bg-white rounded-xl shadow hover:shadow-lg transition duration-300 border border-gray-100">
+                <h3 class="text-xl font-semibold text-blue-600 mb-2">05 软件安装、版本选择与获取</h3>
+                <p class="text-gray-600 text-sm">EXE/MSI/APK/APKS、x86/x64/ARM64选择、安装失败排查、可信来源优先级。</p>
+            </a>
+
+            <!-- 卡片 06 -->
+            <a href="#" class="block p-6 bg-white rounded-xl shadow hover:shadow-lg transition duration-300 border border-gray-100">
+                <h3 class="text-xl font-semibold text-blue-600 mb-2">06 Android 与 Windows 关键差异</h3>
+                <p class="text-gray-600 text-sm">安装包格式、文件路径、权限机制、触屏与鼠标操作差异。</p>
+            </a>
+
+            <!-- 卡片 07 -->
+            <a href="#" class="block p-6 bg-white rounded-xl shadow hover:shadow-lg transition duration-300 border border-gray-100">
+                <h3 class="text-xl font-semibold text-blue-600 mb-2">07 AI 使用与提问模板</h3>
+                <p class="text-gray-600 text-sm">描述问题的方法、上传截图排错、可复制模板、AI 核实与隐私底线。</p>
+            </a>
+
+            <!-- 卡片 08 -->
+            <a href="#" class="block p-6 bg-white rounded-xl shadow hover:shadow-lg transition duration-300 border border-gray-100">
+                <h3 class="text-xl font-semibold text-blue-600 mb-2">08 故障排查与正确求助</h3>
+                <p class="text-gray-600 text-sm">通用排错顺序、有效提问格式、典型无效提问、标准就诊单。</p>
+            </a>
+
+        </div>
+    </main>
+
 </body>
 </html>
