@@ -14,6 +14,70 @@
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
 
+    <!-- 年龄验证遮罩层 -->
+    <div id="ageModal" class="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-md transition-opacity duration-300">
+        <!-- 弹窗卡片 -->
+        <div class="bg-white p-8 rounded-2xl shadow-2xl max-w-md w-full mx-4 text-center border-4 border-pink-300">
+            
+            <!-- 状态1：初始选择 -->
+            <div id="modalStep1">
+                <h2 class="text-4xl font-bold text-pink-500 mb-4 animate-pulse">🔥今晚爸妈不在家🔥</h2>
+                <p class="text-red-500 font-bold mb-6 text-xl animate-bounce">👉 点击和我·一·起·学·习·吧· 👈</p>
+                <p class="text-2xl font-bold text-gray-800 mb-8">🔞請問您是否已滿十八歲？🔞</p>
+                <div class="space-y-4">
+                    <button onclick="handleAdult(true)" class="w-full bg-gradient-to-r from-red-500 to-pink-500 text-white py-4 rounded-xl text-xl font-bold hover:from-red-600 hover:to-pink-600 transition shadow-lg animate-pulse shadow-pink-200">
+                        是，我已滿十八周歲❤️
+                    </button>
+                    <button onclick="handleAdult(false)" class="w-full bg-gray-200 text-gray-500 py-3 rounded-xl text-lg font-bold hover:bg-gray-300 transition">
+                        否🚫
+                    </button>
+                </div>
+            </div>
+
+            <!-- 状态2：点击"是"后的跳转提示 -->
+            <div id="modalLoading" class="hidden py-10">
+                <p class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 animate-pulse mb-4">🚀正在跳轉至學習資料……</p>
+                <p class="text-gray-500">请稍等，马上就好</p>
+            </div>
+
+            <!-- 状态3：点击"否"后的拒绝提示 -->
+            <div id="modalReject" class="hidden py-10">
+                <p class="text-2xl font-bold text-gray-700 mb-8 animate-pulse">好叭……那你不能進去哦 ×</p>
+                <button onclick="resetModal()" class="w-full bg-blue-500 text-white py-4 rounded-xl text-xl font-bold hover:bg-blue-600 transition shadow-md">
+                    我再想想我的年齡
+                </button>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- 控制逻辑的 JavaScript -->
+    <script>
+        function handleAdult(isAdult) {
+            // 隐藏第一步的按钮
+            document.getElementById('modalStep1').classList.add('hidden');
+            
+            if (isAdult) {
+                // 点击"是"，显示加载提示
+                document.getElementById('modalLoading').classList.remove('hidden');
+                
+                // 延迟1.5秒后，隐藏整个遮罩层，露出主页
+                setTimeout(function() {
+                    document.getElementById('ageModal').style.display = 'none';
+                }, 1500);
+            } else {
+                // 点击"否"，显示拒绝页面
+                document.getElementById('modalReject').classList.remove('hidden');
+            }
+        }
+
+        function resetModal() {
+            // 点击"我再想想"，恢复初始选择界面
+            document.getElementById('modalReject').classList.add('hidden');
+            document.getElementById('modalStep1').classList.remove('hidden');
+        }
+    </script>
+
     <!-- 顶部导航栏 -->
     <nav class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
